@@ -25,6 +25,21 @@ def _mutate(gene_seq, gene_set, get_fitness):
 
     return Chromosome(gene_seq, get_fitness(gene_seq))
 
+def get_best(gene_set, seq_length, get_fitness, display):
+    random.seed()
+    best_chromosome = _generate_chromosome(gene_set, seq_length, get_fitness)
+    display(best_chromosome)
+    if best_chromosome.Fitness >= seq_length:
+        return best_chromosome
+    while True:
+        mutated_chromosome = _mutate(best_chromosome.Genes, gene_set, get_fitness)
+        if best_chromosome.Fitness >= mutated_chromosome.Fitness:
+            continue
+        display(mutated_chromosome)
+        if mutated_chromosome.Fitness >= seq_length:
+            return mutated_chromosome
+        best_chromosome = mutated_chromosome
+
 class Chromosome:
     def __init__(self, genes, fitness):
         self.Genes = genes

@@ -50,5 +50,20 @@ class GeneticTests(unittest.TestCase):
 
         self.assertEqual(len(actual_chromosome.Genes), len(target))
 
+    def test_get_best_gets_target_gene_chromosome(self):
+        target = 'Test'
+        gene_seq = target
+
+        def fnGetFitness(genes):
+            return genetic.get_fitness(genes, target)
+
+        actual_chromosome = genetic.get_best(self.GeneSet, len(gene_seq), fnGetFitness, display)
+
+        self.assertEqual(actual_chromosome.Genes, target)
+
+
+def display(chromosome):
+    return None
+
 if __name__ == '__main__':
     unittest.main()
