@@ -16,7 +16,13 @@ class GeneticTests(unittest.TestCase):
 
     def test_get_fitness_max_fitness(self):
         expected_fitness = len("Test")
-        actual_fitness = genetic.get_fitness('Test', 'Test')
+        actual_fitness = genetic.get_fitness(guess='Test', target='Test')
+
+        self.assertEqual(actual_fitness, expected_fitness)
+
+    def test_get_fitness_medium_similarity(self):
+        expected_fitness = 2
+        actual_fitness = genetic.get_fitness(guess='12st', target='Test')
 
         self.assertEqual(actual_fitness, expected_fitness)
 
