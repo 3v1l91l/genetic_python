@@ -39,5 +39,16 @@ class GeneticTests(unittest.TestCase):
         self.assertEqual(len(actual_chromosome.Genes), len(target))
         self.assertIsNotNone(actual_chromosome.Fitness)
 
+    def test_mutate_keeps_same_length(self):
+        target = 'Test'
+        gene_seq = target
+
+        def fnGetFitness(genes):
+            return genetic.get_fitness(genes, target)
+
+        actual_chromosome = genetic._mutate(gene_seq, self.GeneSet, fnGetFitness)
+
+        self.assertEqual(len(actual_chromosome.Genes), len(target))
+
 if __name__ == '__main__':
     unittest.main()
